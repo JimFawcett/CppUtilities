@@ -298,6 +298,7 @@ namespace Utilities
   // Box class
   // - wraps primitive type in class
   // - preserves primitive syntax
+  // - supports inheritance of Boxed primitive
 
   template<typename T>
   class Box
