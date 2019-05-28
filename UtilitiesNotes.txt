@@ -1,0 +1,46 @@
+UtilitiesNotes.txt
+======================================
+0. Start by building all of the Utilities projects as static libraries with their
+   Preprocessor definitions preficed with "no"
+1. CodeUtilities -> Cosmetic, ProcessCmdLine, Converter<T>, Box<T>, PersistFactory<T>
+   - include CodeUtilities.h
+2. DateTime
+   - include DateTime.h
+   - reference static library DateTime.lib in Utilities\Debug
+     or
+   - include DateTime.h, DateTime.cpp in your project
+3. DirExplorer-Events -> IDirEvent, IFileEvent, DirExplorerE
+   - include IDirEvent, IFileEvent, reference static library DirExplorerE.lib
+3. FileSystem -> File, FileInfo, Path, Directory
+   - include FileSystem.h
+   - reference static library FileSystem.lib in Utilities\Debug
+     or
+   - include FileSystem.h, FileSystem.cpp in your project
+4. FileUtilities -> displayFileContents, showDirContents, showFileLines
+   - include FileUtilities.h and make reference to static library FileUtilities.lib
+     or
+   - include FileUtilities.h, FileSystem.h, and FileSystem.cpp in your project
+5. Properties
+   - include Properties.h
+6. SingletonLogger -> ILogger, Logger, SingletonLoggerFactory
+   - include ILogger.h and reference SingletonLogger.lib in Utilities\Debug
+     or
+   - include ILogger.h, SingletonLogger.h, SingletonLogger.cpp, 
+     SingletonLoggerFactory.y, SingletonLoggerFactory.cpp,
+     DateTime.h, DateTime.cpp
+     in your project
+7. StringUtilities -> Title, title, putline, trim, split
+   - include StringUtilities.h
+8. TestUtilities -> ITest, TestExecutive, TestExecutor
+   - include ITest, TestUtilities.h, and reference SingletonLogger.lib in Utilities\Debug
+     or
+   - include ITest, TestUtilities.h, 
+     ISingletonLogger.h, SingletonLogger.h, SingletonLogger.cpp, 
+     DateTime.h, DateTime.cpp
+     in your project
+9. WindowsHelpers -> wstringToString, stringToWideString, GetLastMsg
+   - include WindowsHelpers.h and reference WindowsHelpers.lib in Utilities\Debug
+     or
+   - include WindowsHelpers.h and WindowsHelpers.cpp in your project
+
+   

@@ -1,0 +1,6 @@
+
+  Demonstration Log : no author
+  Sun Oct  7 07:15:17 2018
+    Hi from main
+    hi again
+  end of log

@@ -1,0 +1,477 @@
+
+                                      CodeAnalysis - Version 1.4
+    ==============================================================================================
+     Thu Oct 11 13:13:01 2018
+     Path: "C:\su\Repository\Cpp\Utilities"
+     Args: *.h, *.cpp, *.cs, /v, /m, /r, /f
+                                                                               
+           Code Metrics - Start Line, Size (lines/code), and Complexity (number of scopes)
+    ==============================================================================================
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+                             namespace                   Global Namespace       1       1     549
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+             Application.h       class                        Application      32      27      13
+             Application.h    function                        Application      61       3       1
+             Application.h    function                             doFile      65       7       2
+             Application.h    function                              doDir      73       4       1
+             Application.h    function                          fileCount      78       3       1
+             Application.h    function                           dirCount      82       3       1
+             Application.h    function                   showAllInCurrDir      86       3       1
+             Application.h    function                   showAllInCurrDir      90       3       1
+             Application.h    function                           maxItems      94       3       1
+             Application.h    function                          showStats     100       7       2
+             Application.h    function                               done     108       3       1
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+           Application.cpp    function                        customUsage      21      13       1
+           Application.cpp    function                               main      36      50       7
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+           CodeUtilities.h   namespace                          Utilities      53     300      46
+           CodeUtilities.h      struct                           Cosmetic      57       2       2
+           CodeUtilities.h    function                          ~Cosmetic      57       1       1
+           CodeUtilities.h    function                            preface      65       3       1
+           CodeUtilities.h       class                     ProcessCmdLine      74      35      28
+           CodeUtilities.h    function                               path     112       4       1
+           CodeUtilities.h    function                               path     118       3       1
+           CodeUtilities.h    function                           showPath     123       3       1
+           CodeUtilities.h    function                             option     130       3       1
+           CodeUtilities.h    function                            options     134       4       1
+           CodeUtilities.h    function                        showOptions     140       6       2
+           CodeUtilities.h    function                            pattern     150       3       1
+           CodeUtilities.h    function                           patterns     155       3       1
+           CodeUtilities.h    function                       showPatterns     160       6       2
+           CodeUtilities.h    function                           maxItems     170       3       1
+           CodeUtilities.h    function                           maxItems     175       3       1
+           CodeUtilities.h    function                       showMaxItems     180       3       1
+           CodeUtilities.h    function                         parseError     187       3       1
+           CodeUtilities.h    function                     ProcessCmdLine     194      31       7
+           CodeUtilities.h    function                        showCmdLine     227       6       2
+           CodeUtilities.h    function                        showCmdLine     235       9       1
+           CodeUtilities.h    function                              usage     246       8       1
+           CodeUtilities.h    function                              usage     256       3       1
+           CodeUtilities.h       class                          Converter     269       5       3
+           CodeUtilities.h    function                           toString     278       5       1
+           CodeUtilities.h    function                            toValue     290       6       1
+           CodeUtilities.h       class                                Box     304       9       5
+           CodeUtilities.h    function                                Box     305       2       1
+           CodeUtilities.h    function                                Box     306       2       1
+           CodeUtilities.h    function                         operatorT&     307       2       1
+           CodeUtilities.h    function                          operator=     308       2       1
+           CodeUtilities.h    function                         operator<<     316       5       1
+           CodeUtilities.h      struct                              ToXml     326       4       2
+           CodeUtilities.h    function                             ~ToXml     327       1       1
+           CodeUtilities.h       class                     PersistFactory     339      14       3
+           CodeUtilities.h    function                     PersistFactory     343       3       1
+           CodeUtilities.h    function                              toXml     347       5       1
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+         CodeUtilities.cpp    function                               main      21      71       1
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+                DateTime.h   namespace                          Utilities      35      47       2
+                DateTime.h       class                           DateTime      37      45       1
+                DateTime.h       class                           DateTime      35      45      87
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+              DateTime.cpp    function                              ctime      21       6       1
+              DateTime.cpp    function                          localtime      30       5       1
+              DateTime.cpp    function                           DateTime      38       3       1
+              DateTime.cpp    function                           DateTime      60      28      15
+              DateTime.cpp    function                      operatorstd::      91       3       1
+              DateTime.cpp    function                           DateTime      95       2       1
+              DateTime.cpp    function                           makeTime     103      16       2
+              DateTime.cpp    function                       makeDuration     124       8       1
+              DateTime.cpp    function                                now     135       7       1
+              DateTime.cpp    function                          timepoint     145       3       1
+              DateTime.cpp    function                              ticks     151       4       1
+              DateTime.cpp    function                               time     158       6       1
+              DateTime.cpp    function                          operator<     167       3       1
+              DateTime.cpp    function                          operator>     173       3       1
+              DateTime.cpp    function                         operator==     179       3       1
+              DateTime.cpp    function                         operator!=     185       3       1
+              DateTime.cpp    function                         operator<=     191       3       1
+              DateTime.cpp    function                         operator>=     197       3       1
+              DateTime.cpp    function                         operator+=     203       4       1
+              DateTime.cpp    function                          operator+     210       4       1
+              DateTime.cpp    function                         operator-=     217       4       1
+              DateTime.cpp    function                          operator-     224       3       1
+              DateTime.cpp    function                               year     230       5       1
+              DateTime.cpp    function                              month     238       5       1
+              DateTime.cpp    function                                day     246       5       1
+              DateTime.cpp    function                               hour     254       5       1
+              DateTime.cpp    function                             minute     262       5       1
+              DateTime.cpp    function                             second     270       5       1
+              DateTime.cpp    function                              ctime      17       6       1
+              DateTime.cpp    function                          localtime      26       5       1
+              DateTime.cpp    function                           DateTime      34       3       1
+              DateTime.cpp    function                           DateTime      56      28      15
+              DateTime.cpp    function                      operatorstd::      87       3       1
+              DateTime.cpp    function                           DateTime      91       2       1
+              DateTime.cpp    function                           makeTime      99      16       2
+              DateTime.cpp    function                       makeDuration     120       8       1
+              DateTime.cpp    function                                now     131       7       1
+              DateTime.cpp    function                          timepoint     141       3       1
+              DateTime.cpp    function                              ticks     147       4       1
+              DateTime.cpp    function                               time     154       6       1
+              DateTime.cpp    function                          operator<     163       3       1
+              DateTime.cpp    function                          operator>     169       3       1
+              DateTime.cpp    function                         operator==     175       3       1
+              DateTime.cpp    function                         operator!=     181       3       1
+              DateTime.cpp    function                         operator<=     187       3       1
+              DateTime.cpp    function                         operator>=     193       3       1
+              DateTime.cpp    function                         operator+=     199       4       1
+              DateTime.cpp    function                          operator+     206       4       1
+              DateTime.cpp    function                         operator-=     213       4       1
+              DateTime.cpp    function                          operator-     220       3       1
+              DateTime.cpp    function                               year     226       5       1
+              DateTime.cpp    function                              month     234       5       1
+              DateTime.cpp    function                                day     242       5       1
+              DateTime.cpp    function                               hour     250       5       1
+              DateTime.cpp    function                             minute     258       5       1
+              DateTime.cpp    function                             second     266       5       1
+              DateTime.cpp    function                   readDateTimePart      46       9       1
+              DateTime.cpp    function                               main     284      28       3
+              DateTime.cpp    function                   readDateTimePart      42       9       1
+              DateTime.cpp    function                               main     280      28       3
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+            DirExplorerE.h   namespace                         FileSystem      58     226      34
+            DirExplorerE.h      struct                          IDirEvent      64       4       2
+            DirExplorerE.h    function                         ~IDirEvent      65       2       1
+            DirExplorerE.h      struct                         IFileEvent      70       4       2
+            DirExplorerE.h    function                        ~IFileEvent      71       2       1
+            DirExplorerE.h       class                       DirExplorerE      81      46      29
+            DirExplorerE.h    function                            version      84       2       1
+            DirExplorerE.h    function                      ~DirExplorerE      87       2       1
+            DirExplorerE.h    function                       DirExplorerE     131       3       1
+            DirExplorerE.h    function                       dirSubScribe     139       3       1
+            DirExplorerE.h    function                          notifyDir     145       5       1
+            DirExplorerE.h    function                      fileSubScribe     155       3       1
+            DirExplorerE.h    function                         notifyFile     161      10       3
+            DirExplorerE.h    function                         addPattern     174       5       1
+            DirExplorerE.h    function               hideEmptyDirectories     182       3       1
+            DirExplorerE.h    function                           maxItems     188       3       1
+            DirExplorerE.h    function                   showAllInCurrDir     194       3       1
+            DirExplorerE.h    function                   showAllInCurrDir     200       3       1
+            DirExplorerE.h    function                            recurse     206       3       1
+            DirExplorerE.h    function                             search     212       3       1
+            DirExplorerE.h    function                               find     222      46       9
+            DirExplorerE.h    function                          showStats     271       7       2
+            DirExplorerE.h    function                               done     281       3       1
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+          DirExplorerE.cpp       class                    dirEventHandler      26       7       2
+          DirExplorerE.cpp    function                            execute      29       3       1
+          DirExplorerE.cpp       class                   fileEventHandler      39       7       2
+          DirExplorerE.cpp    function                            execute      42       3       1
+          DirExplorerE.cpp       class                    AppDirExplorerE      48      16       4
+          DirExplorerE.cpp    function                    AppDirExplorerE      49       2       1
+          DirExplorerE.cpp    function                               done      53      10       2
+          DirExplorerE.cpp    function                        customUsage      66      13       1
+          DirExplorerE.cpp    function                               main      81      57       7
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+            DirExplorerT.h   namespace                         FileSystem      47     180      23
+            DirExplorerT.h       class                       DirExplorerT      50      34      22
+            DirExplorerT.h    function                            version      53       2       1
+            DirExplorerT.h    function                       DirExplorerT      89       3       1
+            DirExplorerT.h    function                         addPattern      96       5       1
+            DirExplorerT.h    function               hideEmptyDirectories     105       3       1
+            DirExplorerT.h    function                           maxItems     112       4       1
+            DirExplorerT.h    function                   showAllInCurrDir     120       3       1
+            DirExplorerT.h    function                   showAllInCurrDir     127       3       1
+            DirExplorerT.h    function                            recurse     134       3       1
+            DirExplorerT.h    function                             search     141       6       1
+            DirExplorerT.h    function                               find     154      46       8
+            DirExplorerT.h    function                          fileCount     204       3       1
+            DirExplorerT.h    function                           dirCount     211       3       1
+            DirExplorerT.h    function                          showStats     218       3       1
+            DirExplorerT.h    function                               done     224       3       1
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+          DirExplorerT.cpp    function                        customUsage      19      13       1
+          DirExplorerT.cpp    function                               main      34      50       7
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+             Environment.h   namespace                          Utilities      26       9       1
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+              FileSystem.h   namespace                         FileSystem     130     128      97
+              FileSystem.h       class                              Block     137      13       9
+              FileSystem.h    function                              Block     138       2       1
+              FileSystem.h       class                               File     155      31      37
+              FileSystem.h    function                               name     186       2       1
+              FileSystem.h       class                           FileInfo     193      34      26
+              FileSystem.h       class                               Path     232      10      14
+              FileSystem.h       class                          Directory     247      10      10
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+            FileSystem.cpp    function                              Block      50       2       1
+            FileSystem.cpp    function                          push_back      56       3       1
+            FileSystem.cpp    function                         operator[]      62       5       1
+            FileSystem.cpp    function                         operator[]      70       5       1
+            FileSystem.cpp    function                         operator==      78       3       1
+            FileSystem.cpp    function                         operator!=      84       3       1
+            FileSystem.cpp    function                               size      90       3       1
+            FileSystem.cpp    function                               File      98       2       1
+            FileSystem.cpp    function                              ~File     102      17       3
+            FileSystem.cpp    function                               open     122      34       5
+            FileSystem.cpp    function                            getLine     159      23       3
+            FileSystem.cpp    function                            readAll     185      13       2
+            FileSystem.cpp    function                            putLine     201      13       1
+            FileSystem.cpp    function                           getBlock     217      22       3
+            FileSystem.cpp    function                           putBlock     242      14       2
+            FileSystem.cpp    function                          getBuffer     259      18       2
+            FileSystem.cpp    function                          putBuffer     280      17       2
+            FileSystem.cpp    function                             isGood     300       9       1
+            FileSystem.cpp    function                              flush     312       4       1
+            FileSystem.cpp    function                              clear     319       6       1
+            FileSystem.cpp    function                              close     328      15       3
+            FileSystem.cpp    function                             exists     346       3       1
+            FileSystem.cpp    function                               copy     352       3       1
+            FileSystem.cpp    function                             remove     358       3       1
+            FileSystem.cpp    function                           FileInfo     364       7       1
+            FileSystem.cpp    function                          ~FileInfo     374       3       1
+            FileSystem.cpp    function                               good     380       3       1
+            FileSystem.cpp    function                               name     386       3       1
+            FileSystem.cpp    function                        intToString     392       6       1
+            FileSystem.cpp    function                               date     401      14       1
+            FileSystem.cpp    function                               size     418       3       1
+            FileSystem.cpp    function                          isArchive     424       3       1
+            FileSystem.cpp    function                       isCompressed     430       3       1
+            FileSystem.cpp    function                        isDirectory     436       3       1
+            FileSystem.cpp    function                        isEncrypted     442       3       1
+            FileSystem.cpp    function                           isHidden     448       3       1
+            FileSystem.cpp    function                           isNormal     454       3       1
+            FileSystem.cpp    function                          isOffLine     460       3       1
+            FileSystem.cpp    function                         isReadOnly     466       3       1
+            FileSystem.cpp    function                           isSystem     472       3       1
+            FileSystem.cpp    function                        isTemporary     478       3       1
+            FileSystem.cpp    function                          operator<     484       3       1
+            FileSystem.cpp    function                         operator==     490       3       1
+            FileSystem.cpp    function                          operator>     496       3       1
+            FileSystem.cpp    function                            earlier     502       5       1
+            FileSystem.cpp    function                              later     510       5       1
+            FileSystem.cpp    function                            smaller     518       3       1
+            FileSystem.cpp    function                             larger     524       3       1
+            FileSystem.cpp    function                            toLower     530       6       1
+            FileSystem.cpp    function                            toUpper     540       6       1
+            FileSystem.cpp    function                            getName     549      32       5
+            FileSystem.cpp    function                             getExt     584      15       2
+            FileSystem.cpp    function                            getPath     602      10       1
+            FileSystem.cpp    function                    getFullFileSpec     615       8       1
+            FileSystem.cpp    function                           fileSpec     626      16       2
+            FileSystem.cpp    function                getCurrentDirectory     645       5       1
+            FileSystem.cpp    function                setCurrentDirectory     653       3       1
+            FileSystem.cpp    function                           getFiles     659      16       2
+            FileSystem.cpp    function                     getDirectories     678      16       2
+            FileSystem.cpp    function                             create     697       3       1
+            FileSystem.cpp    function                             exists     703       6       1
+            FileSystem.cpp    function                             remove     712       3       1
+            FileSystem.cpp       class                   FileSystemSearch      30      14      10
+            FileSystem.cpp    function                   FileSystemSearch      44       2       1
+            FileSystem.cpp    function                  ~FileSystemSearch      45       2       1
+            FileSystem.cpp    function                              close      46       2       1
+            FileSystem.cpp    function                          firstFile     718      13       2
+            FileSystem.cpp    function                           nextFile     734       6       1
+            FileSystem.cpp    function                     firstDirectory     743      13       2
+            FileSystem.cpp    function                      nextDirectory     759       6       1
+            FileSystem.cpp    function                              title     770       4       1
+            FileSystem.cpp    function                               main     775     399      31
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+           FileUtilities.h   namespace                          Utilities      56     108      12
+           FileUtilities.h    function                displayFileContents      79      19       4
+           FileUtilities.h    function                    showDirContents     107      26       4
+           FileUtilities.h    function                      showFileLines     141      23       3
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+         FileUtilities.cpp    function                                         17       6       1
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+        ISingletonLogger.h   namespace                          Utilities      47      66      10
+        ISingletonLogger.h       class                             NoLock      54       5       3
+        ISingletonLogger.h    function                               lock      55       2       1
+        ISingletonLogger.h    function                             unlock      56       2       1
+        ISingletonLogger.h       class                               Lock      68      17       4
+        ISingletonLogger.h    function                               Lock      69       2       1
+        ISingletonLogger.h    function                               lock      75       3       1
+        ISingletonLogger.h    function                             unlock      79       3       1
+        ISingletonLogger.h       class                             Locker      97      15       2
+        ISingletonLogger.h    function                           ~ILogger      98       2       1
+        ISingletonLogger.h   namespace                      CodeUtilities      47      64      10
+        ISingletonLogger.h       class                             NoLock      54       5       3
+        ISingletonLogger.h    function                               lock      55       2       1
+        ISingletonLogger.h    function                             unlock      56       2       1
+        ISingletonLogger.h       class                               Lock      68      17       4
+        ISingletonLogger.h    function                               Lock      69       2       1
+        ISingletonLogger.h    function                               lock      75       3       1
+        ISingletonLogger.h    function                             unlock      79       3       1
+        ISingletonLogger.h       class                             Locker      95      15       2
+        ISingletonLogger.h    function                           ~ILogger      96       2       1
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+                   ITest.h   namespace                          Utilities      12       6       3
+                   ITest.h      struct                              ITest      13       4       2
+                   ITest.h    function                             ~ITest      14       2       1
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+              Properties.h   namespace                          Utilities      32      26       5
+              Properties.h       class                           Property      35      22       4
+              Properties.h    function                          ~Property      36       2       1
+              Properties.h    function                         operator()      42       3       1
+              Properties.h    function                         operator()      51       3       1
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+            Properties.cpp    function                                         18       1       1
+            Properties.cpp    function                                         19       3       1
+            Properties.cpp    function                                         35      27       1
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+         SingletonLogger.h   namespace                          Utilities      48     158      18
+         SingletonLogger.h       class                             Locker      67      29       2
+         SingletonLogger.h    function                             Logger      87       3       1
+         SingletonLogger.h       class                             Locker     111       4       1
+         SingletonLogger.h       class                             Locker     118      13       3
+         SingletonLogger.h       class                             Locker     134      14       3
+         SingletonLogger.h       class                             Locker     149       3       1
+         SingletonLogger.h       class                             Locker     154       3       1
+         SingletonLogger.h       class                             Locker     161       9       2
+         SingletonLogger.h       class                             Locker     173       6       1
+         SingletonLogger.h       class                             Locker     182       5       1
+         SingletonLogger.h       class                             Locker     196      11       2
+         SingletonLogger.h   namespace                      CodeUtilities      48     156      18
+         SingletonLogger.h       class                             Locker      65      29       2
+         SingletonLogger.h    function                             Logger      85       3       1
+         SingletonLogger.h       class                             Locker     109       4       1
+         SingletonLogger.h       class                             Locker     116      13       3
+         SingletonLogger.h       class                             Locker     132      14       3
+         SingletonLogger.h       class                             Locker     147       3       1
+         SingletonLogger.h       class                             Locker     152       3       1
+         SingletonLogger.h       class                             Locker     159       9       2
+         SingletonLogger.h       class                             Locker     171       6       1
+         SingletonLogger.h       class                             Locker     180       5       1
+         SingletonLogger.h       class                             Locker     194      11       2
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+       SingletonLogger.cpp    function                          testThrow      20      12       3
+       SingletonLogger.cpp    function                               main      34      66       1
+       SingletonLogger.cpp    function                                         19      12       3
+       SingletonLogger.cpp    function                                         27       3       1
+       SingletonLogger.cpp    function                                         33      66       1
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+   SingletonLoggerFactory.   namespace                          Utilities      43      12       2
+   SingletonLoggerFactory.       class                             Locker      51       3       1
+   SingletonLoggerFactory.   namespace                      CodeUtilities      41       7       2
+   SingletonLoggerFactory.       class                             Locker      44       3       1
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+   SingletonLoggerFactory.    function                        getInstance      19       3       1
+   SingletonLoggerFactory.    function                        getInstance      24       3       1
+   SingletonLoggerFactory.    function                        getInstance      29       3       1
+   SingletonLoggerFactory.    function                        getInstance      34       3       1
+   SingletonLoggerFactory.    function                        getInstance      19       3       1
+   SingletonLoggerFactory.    function                        getInstance      24       3       1
+   SingletonLoggerFactory.    function                        getInstance      29       3       1
+   SingletonLoggerFactory.    function                        getInstance      34       3       1
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+         StringUtilities.h   namespace                          Utilities      49     137      22
+         StringUtilities.h    function                              Title      56       4       1
+         StringUtilities.h    function                              title      63       4       1
+         StringUtilities.h    function                            putline      70       4       1
+         StringUtilities.h    function                               trim      80      31       6
+         StringUtilities.h    function                       trimNewLines     115      31       6
+         StringUtilities.h    function                              split     150      20       4
+         StringUtilities.h    function                         showSplits     174      11       2
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+       StringUtilities.cpp    function                               main      20      22       1
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+           TestUtilities.h   namespace                          Utilities      55     115      14
+           TestUtilities.h       class                       TestExecutor      72       6       5
+           TestUtilities.h    function                            execute      81      18       3
+           TestUtilities.h    function                              check     102       6       1
+           TestUtilities.h       class                      TestExecutive     114      15       8
+           TestUtilities.h      struct                                  {     116       4       1
+              public data: std :: shared_ptr < ITest > pTest ; 
+              public data: std :: string testName ; 
+           TestUtilities.h    function                       registerTest     132       7       2
+           TestUtilities.h    function                       registerTest     141       6       1
+           TestUtilities.h    function                         clearTests     149       3       1
+           TestUtilities.h    function                            doTests     156      13       2
+
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+         TestUtilities.cpp   namespace                          Utilities      23      65      18
+         TestUtilities.cpp       class                         TestPasses      30       5       3
+         TestUtilities.cpp    function                               test      31       2       1
+         TestUtilities.cpp    function                        ~TestPasses      32       2       1
+         TestUtilities.cpp       class                          TestFails      37       5       3
+         TestUtilities.cpp    function                               test      38       2       1
+         TestUtilities.cpp    function                         ~TestFails      39       2       1
+         TestUtilities.cpp       class                         TestThrows      44       9       3
+         TestUtilities.cpp    function                               test      47       4       1
+         TestUtilities.cpp    function                        ~TestThrows      50       2       1
+         TestUtilities.cpp       class                         CodeToTest      57      11       4
+         TestUtilities.cpp    function                         CodeToTest      58       2       1
+         TestUtilities.cpp    function                             result      61       3       1
+         TestUtilities.cpp    function                        ~CodeToTest      63       2       1
+         TestUtilities.cpp       class                           TestCode      70      17       4
+         TestUtilities.cpp    function                           TestCode      71       2       1
+         TestUtilities.cpp    function                               test      74       9       1
+         TestUtilities.cpp    function                          ~TestCode      82       2       1
+         TestUtilities.cpp    function                               main      92      42       5
+
+                          Functions Exceeding Metric Limits and Public Data
+    ==============================================================================================
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+         CodeUtilities.cpp    function                               main      21      71       1
+              DateTime.cpp    function                           DateTime      60      28      15
+              DateTime.cpp    function                           DateTime      56      28      15
+          DirExplorerE.cpp    function                               main      81      57       7
+            FileSystem.cpp    function                               main     775     399      31
+       SingletonLogger.cpp    function                               main      34      66       1
+       SingletonLogger.cpp    function                                         33      66       1
+
+              public data: TestUtilities.h : 117 - struct {
+                std :: shared_ptr < ITest > pTest ; 
+              public data: TestUtilities.h : 118 - struct {
+                std :: string testName ; 
+
+
+    searched   102 dirs
+   processed    34 files
