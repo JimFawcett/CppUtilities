@@ -3,6 +3,10 @@
 ///////////////////////////////////////////////////////////////////////
 // StringUtilities.h - small, generally useful, helper classes       //
 // ver 1.1                                                           //
+// ----------------------------------------------------------------- //
+// copyright © Jim Fawcett, 2012                                     //
+// All rights granted provided that this notice is retained          //
+// ----------------------------------------------------------------- //
 // Language:    C++, Visual Studio 2017                              //
 // Application: Most Projects, CSE687 - Object Oriented Design       //
 // Author:      Jim Fawcett, Syracuse University, CST 4-187          //

@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////
 // CodeUtilities.cpp - small, generally useful, helper classes       //
-// ver 1.3                                                           //
+// ver 1.0                                                           //
 // Language:    C++, Visual Studio 2017                              //
 // Application: Most Projects, CSE687 - Object Oriented Design       //
 // Author:      Jim Fawcett, Syracuse University, CST 4-187          //

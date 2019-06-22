@@ -1,7 +1,7 @@
 #pragma once
 ///////////////////////////////////////////////////////////////////////
 // CodeUtilities.h - small, generally useful, helper classes         //
-// ver 1.3                                                           //
+// ver 1.2                                                           //
 // Language:    C++, Visual Studio 2017                              //
 // Application: Most Projects, CSE687 - Object Oriented Design       //
 // Author:      Jim Fawcett, Syracuse University, CST 4-187          //
@@ -15,7 +15,6 @@
 * - Converter<T>      converts T to and from strings
 * - Box<T>            converts primitive type to instance of a class
 * - PersistFactory<T> adds toXml() method to T
-* - Cosmetic          emits newline on program termination
 *
 * Build Process:
 * --------------
@@ -24,10 +23,11 @@
 *
 * Maintenance History:
 * --------------------
-* ver 1.3 : 02 Oct 2018
-* - added Cosmetic struct
-* ver 1.2 : 22 Sep 2018
-* - fixed display issue in options() by casting to char
+* ver 1.2 : 22 Jun 2019
+* - redesigned handling of commandline args in ProcessCmdLine
+* - now expects path to be preceded by /P
+* - now expects pattern to be preceeded by /p and accepts *.h,*.cpp,.. with no spaces
+* - now expects number to be preceeded by /n
 * ver 1.1 : 10 Aug 2018
 * - added ProcessCmdLine class
 * ver 1.0 : 12 Jan 2018
@@ -48,15 +48,10 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include "..//StringUtilities/StringUtilities.h"
 
 namespace Utilities
 {
-  ///////////////////////////////////////////////////////////////////
-  // Cosmetic struct
-  // - displays newline when instance goes out of scope
-
-  struct Cosmetic { ~Cosmetic() { std::cout << "\n"; } };
-
   /////////////////////////////////////////////////////////////////////
   // preface function
   // - used to add a string preface to an output, e.g., "\n  "
@@ -73,8 +68,8 @@ namespace Utilities
   class ProcessCmdLine
   {
   public:
-    using PathStr = std::string;
-    using Option = int;
+    using Path = std::string;
+    using Option = char;
     using Options = std::vector<Option>;
     using Pattern = std::string;
     using Patterns = std::vector<Pattern>;
@@ -82,16 +77,15 @@ namespace Utilities
 
     ProcessCmdLine(int argc, char** argv, std::ostream& out = std::cout);
     bool parseError();
-    PathStr path();
-    void path(const PathStr& path);
+    Path path();
+    void path(const Path& path);
     Options options();
     void option(Option op);
     Patterns patterns();
     void pattern(const Pattern& patt);
     Number maxItems();
     void maxItems(Number number);
-    void usage();
-    void usage(const std::string& msg);
+    void usage(const std::string& msg = "");
     void showCmdLine(int argc, char** argv);
     void showCmdLine();
     void showPath();
@@ -99,22 +93,24 @@ namespace Utilities
     void showPatterns();
     void showMaxItems();
   private:
-    PathStr path_;
+    void defaultUsageMessage();
+    Path path_;
     Patterns patterns_;
     Options options_;
     int maxItems_ = 0;
     bool parseError_ = false;
     std::ostream& out_;
+    std::ostringstream msg_;
   };
 
   /*----< path operations >------------------------------------------*/
 
-  inline void ProcessCmdLine::path(const PathStr& path) 
+  inline void ProcessCmdLine::path(const Path& path) 
   { 
     path_ = path; 
   }
 
-  inline ProcessCmdLine::PathStr ProcessCmdLine::path()
+  inline ProcessCmdLine::Path ProcessCmdLine::path()
   {
     return path_;
   }
@@ -140,7 +136,7 @@ namespace Utilities
   {
     for (auto opt : options_)
     {
-      out_ << '/' << (char)opt << " ";
+      out_ << '/' << opt << " ";
     }
   }
 
@@ -192,6 +188,11 @@ namespace Utilities
 
   inline ProcessCmdLine::ProcessCmdLine(int argc, char** argv, std::ostream& out) : out_(out)
   {
+    char lastOption = 'z';
+
+    if (msg_.str() == "")
+      defaultUsageMessage();
+
     if (argc < 2)
     {
       out << "\n  command line parse error\n";
@@ -199,25 +200,33 @@ namespace Utilities
       parseError_ = true;
       return;
     }
-    path_ = argv[1];
-    for (int i = 2; i < argc; ++i)
+    
+    //path_ = argv[1];
+    for (int i = 1; i < argc; ++i)
     {
       if (argv[i][0] == '/')
       {
-        if (strlen(argv[i]) > 2)
-          continue;
-        options_.push_back(argv[i][1]);
+        lastOption = argv[i][1];
+        if(lastOption != 'P' && lastOption != 'p' && lastOption != 'n')
+          options_.push_back(lastOption);
       }
       else
       {
-        int number = atoi(argv[i]);
-        if (number > 0)
+        auto splits = split(std::string(argv[i]), ',');
+        switch (lastOption)
         {
-          maxItems_ = number;
-        }
-        else
-        {
-          patterns_.push_back(argv[i]);
+        case 'P':
+          path_ = argv[i];
+          break;
+        case 'p':
+          for (auto patt : splits)
+            patterns_.push_back(patt);
+          break;
+        case 'n':
+          maxItems_ = atoi(argv[i]);
+          break;
+        default:
+          break;
         }
       }
     }
@@ -242,21 +251,30 @@ namespace Utilities
     showMaxItems();
   }
 
-  inline void ProcessCmdLine::usage()
+  inline void ProcessCmdLine::defaultUsageMessage()
   {
-    out_ << "\n  Command Line: path [/option]* [/pattern]* [integer]";
-    out_ << "\n    path is relative or absolute path where processing begins";
-    out_ << "\n    [/option]* are one or more options of the form /s, /r, etc.";
-    out_ << "\n    [pattern]* are one or more pattern strings used for matching";
-    out_ << "\n    [integer] is the maximum number of items to process";
-    out_ << "\n";
+    msg_ << "\n  Command Line: [/opt arg]* [/opt]*";
+    msg_ << "\n    /opt arg has option type - a character, and option argument, a literal string";
+    msg_ << "\n    Examples:";
+    msg_ << "\n      /P ../dir            // starting path";
+    msg_ << "\n      /p *.h,*.cpp,*.cs    // file patterns";
+    msg_ << "\n      /n 42                // max items";
+    msg_ << "\n      /r threads|sockets   // regular expression";
+    msg_ << "\n    /option has option type with no argument";
+    msg_ << "\n    Examples:";
+    msg_ << "\n      /s                   // recurse";
+    msg_ << "\n      /f                   // process files";
+    msg_ << "\n      /d                   // process directories";
+    msg_ << "\n";
   }
 
   inline void ProcessCmdLine::usage(const std::string& msg)
   {
-    out_ << msg;
+    if (msg == "")
+      out_ << msg_.str();
+    else
+      msg_.str(msg);
   }
-
 
   /////////////////////////////////////////////////////////////////////
   // Converter class
@@ -298,7 +316,6 @@ namespace Utilities
   // Box class
   // - wraps primitive type in class
   // - preserves primitive syntax
-  // - supports inheritance of Boxed primitive
 
   template<typename T>
   class Box
@@ -312,13 +329,6 @@ namespace Utilities
     T primitive_;
   };
 
-  template<typename T>
-  std::ostream& operator<<(std::ostream& out, const Box<T>& b)
-  {
-    Box<T>* pNcb = const_cast<Box<T>*>(&b);
-    out << static_cast<T>(*pNcb);
-    return out;
-  }
   ///////////////////////////////////////////////////////////////////////
   // ToXml interface
   // - defines language for creating XML elements
