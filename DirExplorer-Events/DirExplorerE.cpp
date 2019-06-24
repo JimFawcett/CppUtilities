@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////
 // DirExplorerE.cpp - directory explorer using events              //
-// ver 1.0                                                         //
+// ver 1.3                                                         //
 // Jim Fawcett, CSE687 - Object Oriented Design, Fall 2018         //
 /////////////////////////////////////////////////////////////////////
 /*
@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
   Title("Demonstrate DirExplorer-Events, " + DirExplorerE::version());
 
   ProcessCmdLine pcl(argc, argv);
-  customUsage();
+  std::cout << customUsage();
 
   preface("Command Line: ");
   pcl.showCmdLine();

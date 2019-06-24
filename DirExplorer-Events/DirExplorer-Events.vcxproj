@@ -25,7 +25,7 @@
     <ClCompile Include="DirExplorerE.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Repository\Cpp\Utilities\FileSystem\FileSystem.vcxproj">
+    <ProjectReference Include="..\FileSystem\FileSystem.vcxproj">
       <Project>{ace4d371-f507-4ed1-81aa-61c34d675bdf}</Project>
     </ProjectReference>
   </ItemGroup>
@@ -99,7 +99,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_MBCS;TEST_DIREXPLORERE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

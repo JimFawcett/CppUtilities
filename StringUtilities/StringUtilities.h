@@ -2,11 +2,7 @@
 #define STRINGUTILITIES_H
 ///////////////////////////////////////////////////////////////////////
 // StringUtilities.h - small, generally useful, helper classes       //
-// ver 1.1                                                           //
-// ----------------------------------------------------------------- //
-// copyright © Jim Fawcett, 2012                                     //
-// All rights granted provided that this notice is retained          //
-// ----------------------------------------------------------------- //
+// ver 1.0                                                           //
 // Language:    C++, Visual Studio 2017                              //
 // Application: Most Projects, CSE687 - Object Oriented Design       //
 // Author:      Jim Fawcett, Syracuse University, CST 4-187          //
@@ -29,8 +25,6 @@
 *
 * Maintenance History:
 * --------------------
-* ver 1.1 : 14 Oct 2018
-* - added functions sTitle, stitle, and sputline which return strings
 * ver 1.0 : 12 Jan 2018
 * - first release
 * - refactored from earlier Utilities.h
@@ -77,33 +71,6 @@ namespace Utilities
     for (size_t i = 0; i < j; ++i)
       out << "\n";
   }
-  //----< return string with underlined title >----------------------
-
-  inline std::string sTitle(const std::string& text, char underline = '=')
-  {
-    std::ostringstream out;
-    out << "\n  " << text;
-    out << "\n " << std::string(text.size() + 2, underline);
-    return out.str();
-  }
-  //----< return string with underlined subtitle >-------------------
-
-  inline std::string stitle(const std::string& text, char underline = '-')
-  {
-    std::ostringstream out;
-    out << "\n  " << text;
-    out << "\n " << std::string(text.size() + 2, underline);
-    return out.str();
-  }
-  //----< display j newlines >-----------------------------------------
-
-  inline std::string sputline(size_t j = 1)
-  {
-    std::ostringstream out;
-    for (size_t i = 0; i < j; ++i)
-      out << "\n";
-    return out.str();
-  }
   /*--- remove whitespace from front and back of string argument ---*/
   /*
   *  - does not remove newlines
@@ -141,41 +108,7 @@ namespace Utilities
       temp.erase(++pos);
     return temp;
   }
-  /*--- remove newlines from front and back of string argument ----*/
 
-  template <typename T>
-  inline std::basic_string<T> trimNewLines(const std::basic_string<T>& toTrim)
-  {
-    if (toTrim.size() == 0)
-      return toTrim;
-    std::basic_string<T> temp;
-    std::locale loc;
-    typename std::basic_string<T>::const_iterator iter = toTrim.begin();
-    while (isspace(*iter, loc))
-    {
-      if (++iter == toTrim.end())
-      {
-        break;
-      }
-    }
-    for (; iter != toTrim.end(); ++iter)
-    {
-      temp += *iter;
-    }
-    typename std::basic_string<T>::reverse_iterator riter;
-    size_t pos = temp.size();
-    for (riter = temp.rbegin(); riter != temp.rend(); ++riter)
-    {
-      --pos;
-      if (!isspace(*riter, loc))
-      {
-        break;
-      }
-    }
-    if (0 <= pos && pos < temp.size())
-      temp.erase(++pos);
-    return temp;
-  }
   /*--- split sentinel separated strings into a vector of trimmed strings ---*/
 
   template <typename T>

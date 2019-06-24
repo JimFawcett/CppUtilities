@@ -33,6 +33,8 @@
 *
 * Maintenance History:
 * --------------------
+* ver 1.2 : 24 Jun 2019
+* - minor fixes due to CodeUtilities::ProcessCmdLine changes
 * ver 1.1 : 16 Aug 2018
 * - made no recursion default, added option /s for recursion
 * ver 1.0 : 11 Aug 2018
@@ -41,7 +43,6 @@
 */
 #include <vector>
 #include "../FileSystem/FileSystem.h"
-//#include "../Application/Application.h"
 
 namespace FileSystem
 {
@@ -71,7 +72,7 @@ namespace FileSystem
     size_t dirCount();
 
   private:
-    Application app_;
+    App app_;
     std::string path_;
     patterns patterns_;
     bool hideEmptyDir_ = false;

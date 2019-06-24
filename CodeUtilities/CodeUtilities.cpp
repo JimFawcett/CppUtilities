@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////
 // CodeUtilities.cpp - small, generally useful, helper classes       //
-// ver 1.0                                                           //
+// ver 1.3                                                           //
 // Language:    C++, Visual Studio 2017                              //
 // Application: Most Projects, CSE687 - Object Oriented Design       //
 // Author:      Jim Fawcett, Syracuse University, CST 4-187          //
@@ -38,11 +38,11 @@ int main(int argc, char* argv[])
   pcl.showPath();
 
   preface("adding option: ");
-  pcl.option('/q');
+  pcl.option('q');
   pcl.showOptions();
 
   preface("adding pattern: ");
-  pcl.pattern("*.htm");
+  pcl.pattern("*.html");
   pcl.showPatterns();
 
   preface("changing maxItems: ");

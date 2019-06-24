@@ -1,7 +1,7 @@
 #pragma once
 /////////////////////////////////////////////////////////////////////
 // DirExplorerE.h - directory explorer uses events                 //
-// ver 1.2                                                         //
+// ver 1.3                                                         //
 // Jim Fawcett, CSE687 - Object Oriented Design, Fall 2018         //
 /////////////////////////////////////////////////////////////////////
 /*
@@ -38,6 +38,8 @@
 *
 * Maintenance History:
 * --------------------
+* ver 1.3 : 24 Jun 2019
+* - minor fixes due to change in CodeUtilities::ProcessCmdLine
 * ver 1.2 : 19 Aug 2018
 * - moved method definitions to inlines below class declaration
 * - made done a virtual method and added a virtual destructor

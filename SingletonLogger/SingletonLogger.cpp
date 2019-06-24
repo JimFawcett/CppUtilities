@@ -37,7 +37,7 @@ int main()
 
   //testThrow();
 
-  using namespace CodeUtilities;
+  using namespace Utilities;
 
   using ILogger = ILogger<1, Lock>;
   using Logger = Logger<1, Lock>;

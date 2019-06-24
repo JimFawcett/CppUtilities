@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////
 // DirExplorerT.cpp - Template directory explorer                  //
-// ver 1.1                                                         //
+// ver 1.2                                                         //
 // Jim Fawcett, CSE687 - Object Oriented Design, Fall 2018         //
 /////////////////////////////////////////////////////////////////////
 
@@ -8,14 +8,15 @@
 
 #include "DirExplorerT.h"
 #include "Application.h"
-#include "../Utilities/StringUtilities/StringUtilities.h"
-#include "../Utilities/CodeUtilities/CodeUtilities.h"
+#include "../StringUtilities/StringUtilities.h"
+#include "../CodeUtilities/CodeUtilities.h"
 #include <iostream>
+#include <string>
 
 using namespace Utilities;
 using namespace FileSystem;
 
-ProcessCmdLine::Usage customUsage()
+std::string customUsage()
 {
   std::string usage;
   usage += "\n  Command Line: path [/option]* [/pattern]*";

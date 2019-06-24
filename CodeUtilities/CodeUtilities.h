@@ -1,7 +1,7 @@
 #pragma once
 ///////////////////////////////////////////////////////////////////////
 // CodeUtilities.h - small, generally useful, helper classes         //
-// ver 1.2                                                           //
+// ver 1.3                                                           //
 // Language:    C++, Visual Studio 2017                              //
 // Application: Most Projects, CSE687 - Object Oriented Design       //
 // Author:      Jim Fawcett, Syracuse University, CST 4-187          //
@@ -23,6 +23,11 @@
 *
 * Maintenance History:
 * --------------------
+* ver 1.3 : 24 Jun 2019
+* - modified options processing - now have:
+*     default path = "."
+*     default pattern = "*.*"
+* - fixed test stub output
 * ver 1.2 : 22 Jun 2019
 * - redesigned handling of commandline args in ProcessCmdLine
 * - now expects path to be preceded by /P
@@ -73,33 +78,42 @@ namespace Utilities
     using Options = std::vector<Option>;
     using Pattern = std::string;
     using Patterns = std::vector<Pattern>;
+    using Regex = std::string;
     using Number = long int;
 
     ProcessCmdLine(int argc, char** argv, std::ostream& out = std::cout);
+    ProcessCmdLine() : pOut_(&std::cout) {};
+    void processCmdLine(int argc, char** arv, std::ostream& out = std::cout);
     bool parseError();
     Path path();
     void path(const Path& path);
     Options options();
     void option(Option op);
+    bool hasOption(Option op);
     Patterns patterns();
     void pattern(const Pattern& patt);
     Number maxItems();
     void maxItems(Number number);
+    Regex regex();
+    void regex(const Regex& rx);
     void usage(const std::string& msg = "");
-    void showCmdLine(int argc, char** argv);
+    void showCmdLine(int argc, char** argv, bool showFirst = false);
     void showCmdLine();
     void showPath();
     void showOptions();
     void showPatterns();
     void showMaxItems();
+    void showRegex();
+    void setUsageMessage(const std::string& msg);
   private:
     void defaultUsageMessage();
     Path path_;
     Patterns patterns_;
     Options options_;
     int maxItems_ = 0;
+    Regex regex_;
     bool parseError_ = false;
-    std::ostream& out_;
+    std::ostream* pOut_;
     std::ostringstream msg_;
   };
 
@@ -112,12 +126,14 @@ namespace Utilities
 
   inline ProcessCmdLine::Path ProcessCmdLine::path()
   {
+    if (path_ == "")
+      path_ = ".";
     return path_;
   }
 
   inline void ProcessCmdLine::showPath()
   {
-    out_ << path_ << " ";
+    *pOut_ << path_ << " ";
   }
 
   /*----< options operations >---------------------------------------*/
@@ -129,14 +145,24 @@ namespace Utilities
 
   inline ProcessCmdLine::Options ProcessCmdLine::options()
   { 
+    if (options_.size() == 0)
+      options_.push_back('f');
     return options_; 
+  }
+
+  inline bool ProcessCmdLine::hasOption(Option opt)
+  {
+    for (auto op : options_)
+      if (op == opt)
+        return true;
+    return false;
   }
 
   inline void ProcessCmdLine::showOptions()
   {
     for (auto opt : options_)
     {
-      out_ << '/' << opt << " ";
+      *pOut_ << opt << " ";
     }
   }
 
@@ -144,11 +170,15 @@ namespace Utilities
 
   inline void ProcessCmdLine::pattern(const Pattern& pattern)
   {
+    if (patterns_.size() == 1 && patterns_[0] == "*.*")
+      patterns_.erase(patterns_.begin());
     patterns_.push_back(pattern);
   }
 
   inline ProcessCmdLine::Patterns ProcessCmdLine::patterns()
   {
+    if (patterns_.size() == 0)
+      patterns_.push_back("*.*");
     return patterns_;
   }
 
@@ -156,7 +186,7 @@ namespace Utilities
   {
     for (auto patt : patterns_)
     {
-      out_ << patt << " ";
+      *pOut_ << patt << " ";
     }
   }
 
@@ -174,7 +204,26 @@ namespace Utilities
 
   inline void ProcessCmdLine::showMaxItems()
   {
-    out_ << maxItems_ << " ";
+    *pOut_ << maxItems_ << " ";
+  }
+
+  /*----< regex operations >-----------------------------------------*/
+
+  inline void ProcessCmdLine::regex(const Regex& rx)
+  {
+    regex_ = rx;
+  }
+
+  inline ProcessCmdLine::Regex ProcessCmdLine::regex()
+  {
+    if (regex_ == "")
+      regex_ = ".*";
+    return regex_;
+  }
+
+  inline void ProcessCmdLine::showRegex()
+  {
+    *pOut_ << regex_ << " ";
   }
 
   /*----< parseError operation >-------------------------------------*/
@@ -186,69 +235,104 @@ namespace Utilities
 
   /*----< command line operations >----------------------------------*/
 
-  inline ProcessCmdLine::ProcessCmdLine(int argc, char** argv, std::ostream& out) : out_(out)
+  inline void ProcessCmdLine::processCmdLine(int argc, char** argv, std::ostream& out)
   {
-    char lastOption = 'z';
+    pOut_ = &out;
+
+    char lastOption = '\0';
 
     if (msg_.str() == "")
       defaultUsageMessage();
 
-    if (argc < 2)
-    {
-      out << "\n  command line parse error\n";
-      usage();
-      parseError_ = true;
-      return;
-    }
-    
-    //path_ = argv[1];
     for (int i = 1; i < argc; ++i)
     {
       if (argv[i][0] == '/')
       {
         lastOption = argv[i][1];
-        if(lastOption != 'P' && lastOption != 'p' && lastOption != 'n')
+        if(lastOption != 'P' && lastOption != 'p' && lastOption != 'n' && lastOption != 'R')
           options_.push_back(lastOption);
       }
       else
       {
-        auto splits = split(std::string(argv[i]), ',');
+        Patterns splits;
         switch (lastOption)
         {
         case 'P':
           path_ = argv[i];
           break;
         case 'p':
+          splits = split(std::string(argv[i]), ',');
           for (auto patt : splits)
             patterns_.push_back(patt);
           break;
         case 'n':
           maxItems_ = atoi(argv[i]);
           break;
+        case 'R':
+          regex_ = argv[i];
+          break;
+        case 'h':
+          usage();
+          break;
         default:
           break;
         }
       }
     }
+    // default path and patterns
+
+    if (path_ == "")
+      path_ = ".";
+    if (patterns_.size() == 0)
+      patterns_.push_back("*.*");
   }
 
-  inline void ProcessCmdLine::showCmdLine(int argc, char** argv)
+  inline ProcessCmdLine::ProcessCmdLine(int argc, char** argv, std::ostream& out)
   {
-    for (int i = 0; i < argc; ++i)
+    processCmdLine(argc, argv, out);
+  }
+
+  inline void ProcessCmdLine::showCmdLine(int argc, char** argv, bool showFirst)
+  {
+    *pOut_ << "\n\n  commandline args: ";
+    
+    if (showFirst)
+      * pOut_ << "\n  " << argv[0] << " ";
+    else
+      *pOut_ << "\n  ";
+
+    for (int i = 1; i < argc; ++i)
     {
-      out_ << argv[i] << " ";
+      *pOut_ << argv[i] << " ";
     }
   }
 
   inline void ProcessCmdLine::showCmdLine()
   {
-    showPath();
+    *pOut_ << "\n  ";
+    if (path() != "")
+    {
+      *pOut_ << "\n  Path:     ";
+      showPath();
+    }
+    *pOut_ << "\n  options:  ";
     preface("", false);
     showOptions();
+    *pOut_ << "\n  patterns: ";
     preface("", false);
     showPatterns();
-    preface("", false);
-    showMaxItems();
+    if (regex_ != "")
+    {
+      *pOut_ << "\n  Regex:    ";
+      *pOut_ << regex_;
+    }
+    if (maxItems_ > 0)
+    {
+      *pOut_ << "\n  maxItems: ";
+      preface("", false);
+      showMaxItems();
+    }
+    *pOut_ << "\n";
   }
 
   inline void ProcessCmdLine::defaultUsageMessage()
@@ -256,22 +340,27 @@ namespace Utilities
     msg_ << "\n  Command Line: [/opt arg]* [/opt]*";
     msg_ << "\n    /opt arg has option type - a character, and option argument, a literal string";
     msg_ << "\n    Examples:";
-    msg_ << "\n      /P ../dir            // starting path";
-    msg_ << "\n      /p *.h,*.cpp,*.cs    // file patterns";
-    msg_ << "\n      /n 42                // max items";
-    msg_ << "\n      /r threads|sockets   // regular expression";
+    msg_ << "\n      /P \"../..\"             // starting path";
+    msg_ << "\n      /p \"*.h,*.cpp,*.cs\"    // file patterns - no spaces";
+    msg_ << "\n      /n \"42\"                // max items";
+    msg_ << "\n      /R \"threads|sockets\"   // regular expression";
     msg_ << "\n    /option has option type with no argument";
     msg_ << "\n    Examples:";
-    msg_ << "\n      /s                   // recurse";
-    msg_ << "\n      /f                   // process files";
-    msg_ << "\n      /d                   // process directories";
+    msg_ << "\n      /s                     // recurse";
+    msg_ << "\n      /f                     // process files";
+    msg_ << "\n      /d                     // process directories";
     msg_ << "\n";
+  }
+
+  inline void ProcessCmdLine::setUsageMessage(const std::string& msg)
+  {
+    msg_ << msg;
   }
 
   inline void ProcessCmdLine::usage(const std::string& msg)
   {
     if (msg == "")
-      out_ << msg_.str();
+      *pOut_ << msg_.str();
     else
       msg_.str(msg);
   }
