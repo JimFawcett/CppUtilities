@@ -25,6 +25,7 @@ int main(int argc, char* argv[])
   title("Testing ProcessCmdLine");
   ProcessCmdLine pcl(argc, argv);
   pcl.usage();
+  pcl.process();
 
   preface("Command Line: "); pcl.showCmdLine(argc, argv);
   preface("path:     "); pcl.showPath();

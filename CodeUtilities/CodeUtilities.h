@@ -1,7 +1,7 @@
 #pragma once
 ///////////////////////////////////////////////////////////////////////
 // CodeUtilities.h - small, generally useful, helper classes         //
-// ver 1.3                                                           //
+// ver 1.4                                                           //
 // Language:    C++, Visual Studio 2017                              //
 // Application: Most Projects, CSE687 - Object Oriented Design       //
 // Author:      Jim Fawcett, Syracuse University, CST 4-187          //
@@ -23,6 +23,8 @@
 *
 * Maintenance History:
 * --------------------
+* ver 1.4 : 25 Jun 2019
+* - moved processing from constructor to function process
 * ver 1.3 : 24 Jun 2019
 * - modified options processing - now have:
 *     default path = "."
@@ -83,7 +85,7 @@ namespace Utilities
 
     ProcessCmdLine(int argc, char** argv, std::ostream& out = std::cout);
     ProcessCmdLine() : pOut_(&std::cout) {};
-    void processCmdLine(int argc, char** arv, std::ostream& out = std::cout);
+    void process();
     bool parseError();
     Path path();
     void path(const Path& path);
@@ -107,6 +109,8 @@ namespace Utilities
     void setUsageMessage(const std::string& msg);
   private:
     void defaultUsageMessage();
+    int argc_;
+    char** argv_;
     Path path_;
     Patterns patterns_;
     Options options_;
@@ -235,20 +239,18 @@ namespace Utilities
 
   /*----< command line operations >----------------------------------*/
 
-  inline void ProcessCmdLine::processCmdLine(int argc, char** argv, std::ostream& out)
+  inline void ProcessCmdLine::process()
   {
-    pOut_ = &out;
-
     char lastOption = '\0';
 
     if (msg_.str() == "")
       defaultUsageMessage();
 
-    for (int i = 1; i < argc; ++i)
+    for (int i = 1; i < argc_; ++i)
     {
-      if (argv[i][0] == '/')
+      if (argv_[i][0] == '/')
       {
-        lastOption = argv[i][1];
+        lastOption = argv_[i][1];
         if(lastOption != 'P' && lastOption != 'p' && lastOption != 'n' && lastOption != 'R')
           options_.push_back(lastOption);
       }
@@ -258,18 +260,18 @@ namespace Utilities
         switch (lastOption)
         {
         case 'P':
-          path_ = argv[i];
+          path_ = argv_[i];
           break;
         case 'p':
-          splits = split(std::string(argv[i]), ',');
+          splits = split(std::string(argv_[i]), ',');
           for (auto patt : splits)
             patterns_.push_back(patt);
           break;
         case 'n':
-          maxItems_ = atoi(argv[i]);
+          maxItems_ = atoi(argv_[i]);
           break;
         case 'R':
-          regex_ = argv[i];
+          regex_ = argv_[i];
           break;
         case 'h':
           usage();
@@ -288,8 +290,9 @@ namespace Utilities
   }
 
   inline ProcessCmdLine::ProcessCmdLine(int argc, char** argv, std::ostream& out)
+    : argc_(argc), argv_(argv), pOut_(&out)
   {
-    processCmdLine(argc, argv, out);
+    //processCmdLine(argc, argv, out);
   }
 
   inline void ProcessCmdLine::showCmdLine(int argc, char** argv, bool showFirst)
