@@ -1,7 +1,7 @@
 #pragma once
 ///////////////////////////////////////////////////////////////////////
 // CodeUtilities.h - small, generally useful, helper classes         //
-// ver 1.4                                                           //
+// ver 1.5                                                           //
 // Language:    C++, Visual Studio 2017                              //
 // Application: Most Projects, CSE687 - Object Oriented Design       //
 // Author:      Jim Fawcett, Syracuse University, CST 4-187          //
@@ -23,6 +23,8 @@
 *
 * Maintenance History:
 * --------------------
+* ver 1.5 : 02 Jul 2019
+* - added capturing name of log file from command line option /F logfile.txt
 * ver 1.4 : 25 Jun 2019
 * - moved processing from constructor to function process
 * ver 1.3 : 24 Jun 2019
@@ -81,6 +83,7 @@ namespace Utilities
     using Pattern = std::string;
     using Patterns = std::vector<Pattern>;
     using Regex = std::string;
+    using LogFile = std::string;
     using Number = long int;
 
     ProcessCmdLine(int argc, char** argv, std::ostream& out = std::cout);
@@ -98,27 +101,31 @@ namespace Utilities
     void maxItems(Number number);
     Regex regex();
     void regex(const Regex& rx);
+    LogFile logFile();
+    void logFile(const LogFile& lf);
     void usage(const std::string& msg = "");
     void showCmdLine(int argc, char** argv, bool showFirst = false);
-    void showCmdLine();
+    void showParse();
     void showPath();
     void showOptions();
     void showPatterns();
     void showMaxItems();
     void showRegex();
+    void showLogFile();
     void setUsageMessage(const std::string& msg);
   private:
     void defaultUsageMessage();
-    int argc_;
-    char** argv_;
-    Path path_;
-    Patterns patterns_;
-    Options options_;
+    int argc_ = 0;
+    char** argv_ = nullptr;
+    Path path_ = "";
+    Patterns patterns_ = Patterns();
+    Options options_ = Options();
     int maxItems_ = 0;
-    Regex regex_;
+    Regex regex_ = "";
+    LogFile logFile_ = "";
     bool parseError_ = false;
     std::ostream* pOut_;
-    std::ostringstream msg_;
+    std::ostringstream msg_ = std::ostringstream();
   };
 
   /*----< path operations >------------------------------------------*/
@@ -230,11 +237,64 @@ namespace Utilities
     *pOut_ << regex_ << " ";
   }
 
-  /*----< parseError operation >-------------------------------------*/
+  /*----< LogFile operations >---------------------------------------*/
+
+  inline void ProcessCmdLine::logFile(const LogFile& lf)
+  {
+    logFile_ = lf;
+  }
+
+  inline ProcessCmdLine::LogFile ProcessCmdLine::logFile()
+  {
+    return logFile_;
+  }
+
+  inline void ProcessCmdLine::showLogFile()
+  {
+    *pOut_ << logFile_ << " ";
+  }
+
+  /*----< parse operations >-----------------------------------------*/
 
   inline bool ProcessCmdLine::parseError()
   {
     return parseError_;
+  }
+
+  inline void ProcessCmdLine::showParse()
+  {
+    *pOut_ << "\n  ";
+    if (path() != "")
+    {
+      *pOut_ << "\n  Path:     ";
+      showPath();
+    }
+    *pOut_ << "\n  options:  ";
+    preface("", false);
+    showOptions();
+    *pOut_ << "\n  patterns: ";
+    preface("", false);
+    showPatterns();
+    if (regex_ != "")
+    {
+      *pOut_ << "\n  Regex:    ";
+      preface("", false);
+      showRegex();
+      //*pOut_ << regex_;
+    }
+    if (logFile_ != "")
+    {
+      *pOut_ << "\n  LogFile:  ";
+      preface("", false);
+      showLogFile();
+    }
+    if (maxItems_ > 0)
+    {
+      *pOut_ << "\n  maxItems: ";
+      preface("", false);
+      showMaxItems();
+    }
+    *pOut_ << "\n";
   }
 
   /*----< command line operations >----------------------------------*/
@@ -251,7 +311,9 @@ namespace Utilities
       if (argv_[i][0] == '/')
       {
         lastOption = argv_[i][1];
-        if(lastOption != 'P' && lastOption != 'p' && lastOption != 'n' && lastOption != 'R')
+        if(
+          lastOption != 'P' && lastOption != 'p' && 
+          lastOption != 'n' && lastOption != 'R' && lastOption != 'F')
           options_.push_back(lastOption);
       }
       else
@@ -273,6 +335,9 @@ namespace Utilities
         case 'R':
           regex_ = argv_[i];
           break;
+        case 'F':
+          logFile_ = argv_[i];
+          break;
         case 'h':
           usage();
           break;
@@ -290,10 +355,7 @@ namespace Utilities
   }
 
   inline ProcessCmdLine::ProcessCmdLine(int argc, char** argv, std::ostream& out)
-    : argc_(argc), argv_(argv), pOut_(&out)
-  {
-    //processCmdLine(argc, argv, out);
-  }
+    : argc_(argc), argv_(argv), pOut_(&out) {}
 
   inline void ProcessCmdLine::showCmdLine(int argc, char** argv, bool showFirst)
   {
@@ -310,34 +372,6 @@ namespace Utilities
     }
   }
 
-  inline void ProcessCmdLine::showCmdLine()
-  {
-    *pOut_ << "\n  ";
-    if (path() != "")
-    {
-      *pOut_ << "\n  Path:     ";
-      showPath();
-    }
-    *pOut_ << "\n  options:  ";
-    preface("", false);
-    showOptions();
-    *pOut_ << "\n  patterns: ";
-    preface("", false);
-    showPatterns();
-    if (regex_ != "")
-    {
-      *pOut_ << "\n  Regex:    ";
-      *pOut_ << regex_;
-    }
-    if (maxItems_ > 0)
-    {
-      *pOut_ << "\n  maxItems: ";
-      preface("", false);
-      showMaxItems();
-    }
-    *pOut_ << "\n";
-  }
-
   inline void ProcessCmdLine::defaultUsageMessage()
   {
     msg_ << "\n  Command Line: [/opt arg]* [/opt]*";
@@ -345,13 +379,14 @@ namespace Utilities
     msg_ << "\n    Examples:";
     msg_ << "\n      /P \"../..\"             // starting path";
     msg_ << "\n      /p \"*.h,*.cpp,*.cs\"    // file patterns - no spaces";
-    msg_ << "\n      /n \"42\"                // max items";
     msg_ << "\n      /R \"threads|sockets\"   // regular expression";
+    msg_ << "\n      /F \"logFile.txt\"       // log file";
+    msg_ << "\n      /n \"42\"                // max items";
     msg_ << "\n    /option has option type with no argument";
     msg_ << "\n    Examples:";
-    msg_ << "\n      /s                     // recurse";
-    msg_ << "\n      /f                     // process files";
-    msg_ << "\n      /d                     // process directories";
+    msg_ << "\n      /s                       // recurse";
+    msg_ << "\n      /f                       // process files";
+    msg_ << "\n      /d                       // process directories";
     msg_ << "\n";
   }
 

@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
   std::cout << customUsage();
 
   preface("Command Line: ");
-  pcl.showCmdLine();
+  pcl.showParse();
   putline();
 
   if (pcl.parseError())

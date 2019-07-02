@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
   pcl.usage(customUsage());
 
   preface("Command Line: ");
-  pcl.showCmdLine();
+  pcl.showParse();
   putline();
 
   if (pcl.parseError())
