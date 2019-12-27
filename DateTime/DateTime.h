@@ -74,9 +74,9 @@ namespace Utilities
     size_t hour();
     size_t minute();
     size_t second();
-  private:
     char* ctime(const std::time_t* pTime);
     std::tm* localtime(const time_t* pTime);
+  private:
     TimePoint tp_;
   };
 }
