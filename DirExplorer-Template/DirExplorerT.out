@@ -1,0 +1,21 @@
+  Using Application methods doFile and doDir
+
+  dir--->  C:\github\JimFawcett\CppUtilities\DirExplorer-Template
+  file-->    Application.cpp
+  file-->    Application.h
+  file-->    Application1.cpp.html
+  file-->    Application1.h.html
+  file-->    DirExplorer-Template-classes.gliffy
+  file-->    DirExplorer-Template-classes.jpg
+  file-->    DirExplorer-Template.jpg
+  file-->    DirExplorer-Template.vcxproj
+  file-->    DirExplorer-Template.vcxproj.filters
+  file-->    DirExplorer-Template.vcxproj.user
+  file-->    DirExplorerT.cpp
+  file-->    DirExplorerT.h
+  file-->    DirExplorerT1.cpp.html
+  file-->    DirExplorerT1.h.html
+  dir--->  C:\github\JimFawcett\CppUtilities\DirExplorer-Template\x64
+
+  processed 14 files in 2 directories
+
