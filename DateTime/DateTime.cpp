@@ -10,6 +10,7 @@
 #include <sstream>
 #include <iostream>
 #include <unordered_map>
+#include <thread>
 
 #pragma warning(disable : 4267)  // disable warning about loss of significance
 
@@ -218,11 +219,43 @@ DateTime DateTime::operator-=(const DateTime::Duration& dur)
   tp_ -= dur;
   return *this;
 }
-//---- make DateTime from instance time minus duration >-------------
+//----< make DateTime from instance time minus duration >------------
 
 DateTime DateTime::operator-(const DateTime::Duration& dur)
 {
   return DateTime(tp_ - dur);
+}
+//----< start timer >------------------------------------------------
+
+void DateTime::start() {
+  start_ = HiResClock::now();
+  running_ = true;
+}
+//----< stop timer >-------------------------------------------------
+
+void DateTime::stop() {
+  end_ = HiResClock::now();
+  running_ = false;
+}
+//----< return duration in microseconds >----------------------------
+
+double DateTime::elapsedMicroseconds() {
+  HiResTimePoint endTime;
+  if (running_) {
+    endTime = HiResClock::now();
+  }
+  else {
+    endTime = end_;
+  }
+  auto duration = std::chrono::duration_cast<std::chrono::microseconds> (
+    endTime - start_
+    ).count();
+  return static_cast<double>(duration);
+}
+//----< return duration in milliseconds >----------------------------
+
+double DateTime::elapsedMilliseconds() {
+  return elapsedMicroseconds() / 1000.0;
 }
 //----< return year count >------------------------------------------
 
@@ -302,6 +335,15 @@ int main()
     std::cout << "\n  constructing DateTime from formated DateTime string";
     DateTime newDt(dt.time());
     std::cout << "\n  " << newDt.time();
+
+    std::cout << "\n\n  start timer:";
+    dt.start();
+    std::cout << "\n  sleep for 50 millisecs";
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+    std::cout << "\n  duration in microsecs: " << dt.elapsedMicroseconds();
+    std::cout << "\n  sleep for 150 millisecs";
+    std::this_thread::sleep_for(std::chrono::milliseconds(150));
+    std::cout << "\n  duration in microsecs: " << dt.elapsedMicroseconds();
   }
   catch (std::exception& ex)
   {

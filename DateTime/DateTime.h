@@ -37,13 +37,20 @@ namespace Utilities
   {
   public:
     using SysClock = std::chrono::system_clock;
+    using HiResClock = std::chrono::high_resolution_clock;
     using TimePoint = std::chrono::system_clock::time_point;
+    using HiResTimePoint = HiResClock::time_point;
     using Duration = std::chrono::system_clock::duration;
 
     DateTime();
     DateTime(std::string dtStr);
     DateTime(const TimePoint& tp);
     operator std::string();
+
+    void start();
+    void stop();
+    double elapsedMicroseconds();
+    double elapsedMilliseconds();
 
     std::string now();
     TimePoint timepoint();
@@ -78,5 +85,8 @@ namespace Utilities
     std::tm* localtime(const time_t* pTime);
   private:
     TimePoint tp_;
+    HiResTimePoint start_;
+    HiResTimePoint end_;
+    bool running_ = false;
   };
 }
